@@ -53,3 +53,35 @@ def search_messages(query:str, limit:int = 10) -> list[Message]:
         message_list.append(message)
 
     return message_list 
+
+def get_conversation(contact: str, limit: int = 50) -> list[Message]:
+    query = """
+            SELECT m.ROWID, m.text, m.handle_id, m.date, m.is_from_me, m.cache_has_attachments
+            FROM message m
+            JOIN chat_message_join cmj ON cmj.message_id = m.ROWID
+            JOIN chat c ON c.ROWID = cmj.chat_id
+            JOIN chat_handle_join chj ON chj.chat_id = c.ROWID
+            JOIN handle h ON h.ROWID = chj.handle_id
+            WHERE m.text IS NOT NULL
+            AND h.id = ?
+            ORDER BY m.date DESC
+            LIMIT ?
+                """
+    
+    con = get_connection()
+    cursor = con.execute(query, (contact, limit))
+    rows = cursor.fetchall()
+
+    message_list = []
+    for row_id, text, handle_id, date, is_from_me, has_attachments in rows:
+        message = Message(
+            id=row_id,
+            text=text,
+            handle_id=handle_id,
+            date=normalize_timestamp(date),
+            is_from_me=is_from_me,
+            has_attachments=has_attachments
+        )
+        message_list.append(message)
+
+    return message_list 

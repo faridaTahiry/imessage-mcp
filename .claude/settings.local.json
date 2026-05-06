@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(mkdir -p '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/models' '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/repositories' '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/services' '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/helpers')",
-      "Bash(touch '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/models/__init__.py' '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/repositories/__init__.py' '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/services/__init__.py' '/Users/faridatahiry/Desktop/Coding Project/imessage_mcp/helpers/__init__.py')"
-    ]
-  }
-}
